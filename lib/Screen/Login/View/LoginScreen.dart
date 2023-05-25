@@ -1,18 +1,18 @@
-import 'package:fire_app/Screen/SignUp/Controllor/SignUpControllor.dart';
+import 'package:fire_app/Screen/Login/Controllor/LoginControllor.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({Key? key}) : super(key: key);
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
-  SignUpControllor signUpControllor = Get.put(
-    SignUpControllor(),
+class _LoginScreenState extends State<LoginScreen> {
+  LoginControllor loginControllor = Get.put(
+    LoginControllor(),
   );
 
   @override
@@ -25,18 +25,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
               height: 200.h,
               color: Colors.white,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Column(
               children: [
-                Padding(
-                  padding: EdgeInsets.all(10.sp),
-                  child: Text(
-                    "Welcome To Education App",
-                    style: TextStyle(
-                      fontSize: 15.sp,
-                      color: Colors.black,
+                SizedBox(height: 20.sp),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(10.sp),
+                      child: Text(
+                        "Welcome To Education App",
+                        style: TextStyle(
+                          fontSize: 15.sp,
+                          color: Colors.black,
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ],
             ),
@@ -68,7 +73,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         SizedBox(height: 20.sp),
                         Text(
-                          "SignUp",
+                          "Login",
                           style: TextStyle(
                             fontSize: 25.sp,
                             color: Colors.white,
@@ -79,7 +84,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           style: TextStyle(
                             color: Colors.white,
                           ),
-                          controller: signUpControllor.txtEmail,
+                          controller: loginControllor.txtEmail,
                           decoration: InputDecoration(
                             label: Text(
                               "Enter Email Address",
@@ -118,7 +123,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           style: TextStyle(
                             color: Colors.white,
                           ),
-                          controller: signUpControllor.txtPass,
+                          controller: loginControllor.txtPassword,
                           decoration: InputDecoration(
                             label: Text(
                               "Enter Password",
@@ -155,15 +160,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         SizedBox(height: 20.sp),
                         InkWell(
                           onTap: () async {
-                            String? msg = await signUpControllor.SignUp(
-                              email: signUpControllor.txtEmail.text,
-                              password: signUpControllor.txtPass.text,
+                            String? msg = await loginControllor.LogIn(
+                              email: loginControllor.txtEmail.text,
+                              password: loginControllor.txtPassword.text,
                             );
 
-                            print(
-                                "=======================================================================$msg");
+                            Get.snackbar(
+                              "$msg",
+                              "",
+                            );
 
-                            Get.snackbar("$msg", "");
+                            if (msg == "success") {
+                              Get.toNamed('/home');
+                            } else {
+                              Get.toNamed('/signUp');
+                            }
                           },
                           child: Container(
                             height: 40.sp,
@@ -174,7 +185,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             alignment: Alignment.center,
                             child: Text(
-                              "Create",
+                              "Login",
                               style: TextStyle(
                                 fontSize: 15.sp,
                               ),
