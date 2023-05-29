@@ -68,6 +68,22 @@ class FireHelper {
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+    return await firebaseAuth.signInWithCredential(credential);
+  }
+
+  Map UserData() {
+    User? user = firebaseAuth.currentUser;
+
+    String? image = user!.photoURL;
+    String? name = user.displayName;
+    String? email = user.email;
+    String? phone = user.phoneNumber;
+
+    return {
+      "image": image,
+      "name": name,
+      "email": email,
+      "phone": phone,
+    };
   }
 }
