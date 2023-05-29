@@ -41,6 +41,7 @@ dependencies:
   google_sign_in: any
   firebase_core: ^2.13.0
   firebase_auth: ^4.6.1
+  progress_state_button: ^1.0.4
 
 dev_dependencies:
   flutter_test:

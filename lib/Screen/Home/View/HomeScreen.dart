@@ -17,16 +17,8 @@ class _HomeScreenState extends State<HomeScreen> {
         body: Center(
           child: IconButton(
             onPressed: () async {
-              String msg = await FireHelper.fireHelper.SignOut();
-
-              Get.snackbar(
-                "$msg",
-                "",
-              );
-
-              if(msg == "success"){
-                Get.offAndToNamed('/logIn');
-              }
+              FireHelper.fireHelper.SignOut();
+              Get.offAndToNamed('/logIn');
             },
             icon: Icon(
               Icons.logout_outlined,

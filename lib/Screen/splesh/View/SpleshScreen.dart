@@ -20,8 +20,9 @@ class _SpleshScreenState extends State<SpleshScreen> {
   @override
   Widget build(BuildContext context) {
     Timer(Duration(seconds: 3), () {
-      Get.offAndToNamed('/logIn');
+      Get.offAndToNamed(FireHelper.fireHelper.checkLogin() == true ? '/home' : '/logIn');
     });
+
 
     return SafeArea(
       child: Scaffold(

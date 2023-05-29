@@ -39,6 +39,8 @@ class FireHelper {
         msg = "Failed";
       },
     );
+
+    print(msg);
     return msg;
   }
 
@@ -52,24 +54,15 @@ class FireHelper {
     }
   }
 
-  Future<String> SignOut() async {
-    String? msg = "failed";
-    await firebaseAuth.signOut().then(
-      (value) {
-        msg = "success";
-      },
-    ).catchError((e) {
-      msg = "failed";
-    });
-
-    return msg!;
+  Future<void> SignOut() async {
+    await firebaseAuth.signOut();
+    GoogleSignIn().signOut();
   }
 
   Future<UserCredential> signInWithGoogle() async {
     GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
-    GoogleSignInAuthentication? googleAuth =
-        await googleUser?.authentication;
+    GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
 
     var credential = GoogleAuthProvider.credential(
       accessToken: googleAuth?.accessToken,

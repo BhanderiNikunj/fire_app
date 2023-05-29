@@ -4,7 +4,11 @@ import 'package:get/get.dart';
 
 class SignUpControllor extends GetxController {
   TextEditingController txtEmail = TextEditingController();
-  TextEditingController txtPass = TextEditingController();
+  TextEditingController txtPassword = TextEditingController();
+
+  RxBool isPass = false.obs;
+
+
 
   Future<String?> SignUp({required email, required password}) async {
     return await FireHelper.fireHelper.SignUp(
