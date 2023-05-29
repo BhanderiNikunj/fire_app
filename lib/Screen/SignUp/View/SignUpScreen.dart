@@ -76,37 +76,37 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         SizedBox(height: 40.sp),
                         TextField(
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                           ),
                           controller: signUpControllor.txtEmail,
                           decoration: InputDecoration(
-                            label: Text(
+                            label: const Text(
                               "Enter Email Address",
                               style: TextStyle(
                                 color: Colors.white,
                               ),
                             ),
                             border: OutlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                   color: Colors.white,
                                   style: BorderStyle.solid),
                               borderRadius: BorderRadius.circular(10.sp),
                             ),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                   color: Colors.white,
                                   style: BorderStyle.solid),
                               borderRadius: BorderRadius.circular(10.sp),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                   color: Colors.white,
                                   style: BorderStyle.solid),
                               borderRadius: BorderRadius.circular(10.sp),
                             ),
                             disabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                   color: Colors.white,
                                   style: BorderStyle.solid),
                               borderRadius: BorderRadius.circular(10.sp),
@@ -115,37 +115,37 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         SizedBox(height: 10.sp),
                         TextField(
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                           ),
                           controller: signUpControllor.txtPass,
                           decoration: InputDecoration(
-                            label: Text(
+                            label: const Text(
                               "Enter Password",
                               style: TextStyle(
                                 color: Colors.white,
                               ),
                             ),
                             border: OutlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                   color: Colors.white,
                                   style: BorderStyle.solid),
                               borderRadius: BorderRadius.circular(10.sp),
                             ),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                   color: Colors.white,
                                   style: BorderStyle.solid),
                               borderRadius: BorderRadius.circular(10.sp),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                   color: Colors.white,
                                   style: BorderStyle.solid),
                               borderRadius: BorderRadius.circular(10.sp),
                             ),
                             disabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                   color: Colors.white,
                                   style: BorderStyle.solid),
                               borderRadius: BorderRadius.circular(10.sp),
@@ -160,10 +160,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               password: signUpControllor.txtPass.text,
                             );
 
-                            print(
-                                "=======================================================================$msg");
-
-                            Get.snackbar("$msg", "");
+                            Get.snackbar(
+                              "$msg",
+                              "",
+                            );
+                            Get.back();
                           },
                           child: Container(
                             height: 40.sp,
@@ -186,6 +187,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
               ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: TextButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  child: Text(
+                    "You Have Already Account? SignIn",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  )),
             ),
           ],
         ),

@@ -6,6 +6,9 @@ class LoginControllor extends GetxController {
   TextEditingController txtEmail = TextEditingController();
   TextEditingController txtPassword = TextEditingController();
 
+  RxBool isPass = false.obs;
+
+
   Future<String?> LogIn({required email, required password}) {
     return FireHelper.fireHelper.LogIn(
       email: email,

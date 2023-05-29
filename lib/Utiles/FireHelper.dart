@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class FireHelper {
   static FireHelper fireHelper = FireHelper._();
@@ -40,5 +40,41 @@ class FireHelper {
       },
     );
     return msg;
+  }
+
+  Future<bool> checkLogin() async {
+    User? user = await firebaseAuth.currentUser;
+
+    if (user == null) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  Future<String> SignOut() async {
+    String? msg = "failed";
+    await firebaseAuth.signOut().then(
+      (value) {
+        msg = "success";
+      },
+    ).catchError((e) {
+      msg = "failed";
+    });
+
+    return msg!;
+  }
+
+  Future<UserCredential> signInWithGoogle() async {
+    GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+
+    var credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+    return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 }
