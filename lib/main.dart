@@ -1,3 +1,4 @@
+import 'package:fire_app/Screen/AddData/View/AddDataScreen.dart';
 import 'package:fire_app/Screen/Home/View/HomeScreen.dart';
 import 'package:fire_app/Screen/Login/View/LoginScreen.dart';
 import 'package:fire_app/Screen/SignUp/View/SignUpScreen.dart';
@@ -32,6 +33,10 @@ Future<void> main() async {
           GetPage(
             name: '/home',
             page: () => HomeScreen(),
+          ),
+          GetPage(
+            name: '/addData',
+            page: () => AddDataScreen(),
           ),
         ],
       ),

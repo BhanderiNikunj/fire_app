@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -7,6 +8,7 @@ class FireHelper {
   FireHelper._();
 
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
   Future<String?> SignUp({required email, required password}) async {
     String? msg;
@@ -85,5 +87,34 @@ class FireHelper {
       "email": email,
       "phone": phone,
     };
+  }
+
+  // FireStore
+
+  Future<void> AddData({
+    required name,
+    required price,
+    required discount,
+    required rate,
+    required desc,
+    required brand,
+  }) async {
+    // User? user = await firebaseAuth.currentUser;
+    //
+    // String uid = user!.uid;
+    await firebaseFirestore.collection("Product").add(
+      {
+        "name": name,
+        "price": price,
+        "discount": discount,
+        "rate": rate,
+        "desc": desc,
+        "brand": brand,
+      },
+    );
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> readData() {
+    return firebaseFirestore.collection("Product").snapshots();
   }
 }

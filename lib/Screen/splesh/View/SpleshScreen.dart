@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:fire_app/Screen/splesh/Controllor/SpleshControllor.dart';
 import 'package:fire_app/Utiles/FireHelper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,15 +13,25 @@ class SpleshScreen extends StatefulWidget {
 }
 
 class _SpleshScreenState extends State<SpleshScreen> {
+
+  SpleshControllor spleshControllor = Get.put(SpleshControllor(),);
   @override
   void initState() {
     super.initState();
+
+    checkLogin();
+
+  }
+
+  Future<void> checkLogin() async {
+    spleshControllor.isLogin = await FireHelper.fireHelper.checkLogin();
+
   }
 
   @override
   Widget build(BuildContext context) {
     Timer(Duration(seconds: 3), () {
-      Get.offAndToNamed(FireHelper.fireHelper.checkLogin() == true ? '/home' : '/logIn');
+      Get.offAndToNamed(spleshControllor.isLogin == true ? '/home' : '/logIn');
     });
 
 
