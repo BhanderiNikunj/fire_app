@@ -98,6 +98,7 @@ class FireHelper {
     required rate,
     required desc,
     required brand,
+    required size,
   }) async {
     // User? user = await firebaseAuth.currentUser;
     //
@@ -110,6 +111,7 @@ class FireHelper {
         "rate": rate,
         "desc": desc,
         "brand": brand,
+        "size":size,
       },
     );
   }

@@ -100,8 +100,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 var discount = data['discount'];
                 var desc = data['desc'];
                 var brand = data['brand'];
+                var size = data['size'];
 
                 HomeModel homeModel = HomeModel(
+                  size: size,
                   name: name,
                   brand: brand,
                   desc: desc,
@@ -127,6 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Text("${homeControllor.DataList[index].price}",),
                         Text("${homeControllor.DataList[index].rate}",),
                         Text("${homeControllor.DataList[index].desc}",),
+                        Text("${homeControllor.DataList[index].size}",),
                       ],
                     ),
                   );
@@ -136,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
             }
             return CircularProgressIndicator();
           },
-          stream: FireHelper.fireHelper.readData(),
+          stream: homeControllor.ReadData(),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
