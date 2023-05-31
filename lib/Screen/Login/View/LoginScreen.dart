@@ -3,7 +3,6 @@ import 'package:fire_app/Utiles/FireHelper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:progress_state_button/progress_button.dart';
 import 'package:sizer/sizer.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -17,8 +16,6 @@ class _LoginScreenState extends State<LoginScreen> {
   LoginControllor loginControllor = Get.put(
     LoginControllor(),
   );
-
-  var isCaeck = ButtonState.idle;
 
   @override
   Widget build(BuildContext context) {

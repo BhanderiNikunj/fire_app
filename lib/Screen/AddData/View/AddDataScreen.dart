@@ -123,6 +123,49 @@ class _AddDataScreenState extends State<AddDataScreen> {
                   ),
                 ),
                 SizedBox(height: 10.sp),
+                Obx(
+                  () => DropdownButton(
+                    value: addDataControllor.category.value,
+                    isExpanded: true,
+                    items: [
+                      DropdownMenuItem(
+                        value: "cloths",
+                        child: Text(
+                          "Cloths",
+                        ),
+                      ),
+                      DropdownMenuItem(
+                        value: "boots",
+                        child: Text(
+                          "Boots",
+                        ),
+                      ),
+                      DropdownMenuItem(
+                        value: "bags",
+                        child: Text(
+                          "Bags",
+                        ),
+                      ),
+                    ],
+                    onChanged: (value) {
+                      addDataControllor.category.value = value!;
+                    },
+                  ),
+                ),
+                SizedBox(height: 10.sp),
+                Row(
+                  children: [
+                    Container(
+                      width: 30.sp,
+                      height: 30.sp,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10.sp),
                 TextField(
                   controller: addDataControllor.txtProductDesc,
                   maxLines: 3,
@@ -145,6 +188,7 @@ class _AddDataScreenState extends State<AddDataScreen> {
                 ElevatedButton(
                   onPressed: () async {
                     await addDataControllor.AddData(
+                      size: "20",
                       name: addDataControllor.txtProductName.text,
                       price: addDataControllor.txtProductPrice.text,
                       discount: addDataControllor.txtProductDiscount.text,

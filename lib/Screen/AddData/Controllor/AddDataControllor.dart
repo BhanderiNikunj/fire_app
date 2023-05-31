@@ -10,6 +10,8 @@ class AddDataControllor extends GetxController {
   TextEditingController txtProductDiscount = TextEditingController();
   TextEditingController txtProductDesc = TextEditingController();
 
+  RxString category = "boots".obs;
+
   Future<void> AddData({
     required name,
     required price,
@@ -17,6 +19,7 @@ class AddDataControllor extends GetxController {
     required rate,
     required desc,
     required brand,
+    required size,
   }) async {
     await FireHelper.fireHelper.AddData(
       name: name,
@@ -25,6 +28,7 @@ class AddDataControllor extends GetxController {
       rate: rate,
       desc: desc,
       brand: brand,
+      size: size,
     );
   }
 }
