@@ -117,6 +117,6 @@ class FireHelper {
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> readData() {
-    return firebaseFirestore.collection("Product").snapshots();
+     return firebaseFirestore.collection("Product").snapshots();
   }
 }
