@@ -111,12 +111,36 @@ class FireHelper {
         "rate": rate,
         "desc": desc,
         "brand": brand,
-        "size":size,
+        "size": size,
       },
     );
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> readData() {
-     return firebaseFirestore.collection("Product").snapshots();
+    return firebaseFirestore.collection("Product").snapshots();
+  }
+
+  void UpdateData({
+    required key,
+    required name,
+    required price,
+    required discount,
+    required rate,
+    required desc,
+    required brand,
+    required size,
+  }) {
+    print(key);
+    firebaseFirestore.collection("Product").doc(key).set(
+      {
+        "name": name,
+        "price": price,
+        "discount": discount,
+        "rate": rate,
+        "desc": desc,
+        "brand": brand,
+        "size": size,
+      },
+    );
   }
 }

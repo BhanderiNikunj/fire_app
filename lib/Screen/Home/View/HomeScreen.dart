@@ -31,59 +31,18 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black,
-          // actions: [
-          //   IconButton(
-          //     onPressed: () {
-          //       FireHelper.fireHelper.SignOut();
-          //       Get.offAndToNamed('/logIn');
-          //     },
-          //     icon: Icon(
-          //       Icons.logout,
-          //     ),
-          //   ),
-          // ],
+          actions: [
+            IconButton(
+              onPressed: () {
+                FireHelper.fireHelper.SignOut();
+                Get.offAndToNamed('/logIn');
+              },
+              icon: Icon(
+                Icons.logout,
+              ),
+            ),
+          ],
         ),
-        // drawer: Drawer(
-        //   child: Padding(
-        //     padding: EdgeInsets.all(10.sp),
-        //     child: Column(
-        //       children: [
-        //         CircleAvatar(
-        //           radius: 30.sp,
-        //           backgroundImage:
-        //               NetworkImage("${homeControllor.userDetail['image']}"),
-        //         ),
-        //         SizedBox(height: 10.sp),
-        //         Text(
-        //           "Name :- ${homeControllor.userDetail['name']}",
-        //           style: TextStyle(
-        //             fontWeight: FontWeight.bold,
-        //             fontSize: 12.sp,
-        //             color: Colors.black,
-        //           ),
-        //         ),
-        //         SizedBox(height: 10.sp),
-        //         Text(
-        //           "Email :- ${homeControllor.userDetail['email']}",
-        //           style: TextStyle(
-        //             fontWeight: FontWeight.bold,
-        //             fontSize: 12.sp,
-        //             color: Colors.black,
-        //           ),
-        //         ),
-        //         SizedBox(height: 10.sp),
-        //         Text(
-        //           "Email :- ${homeControllor.userDetail['email']}",
-        //           style: TextStyle(
-        //             fontWeight: FontWeight.bold,
-        //             fontSize: 12.sp,
-        //             color: Colors.black,
-        //           ),
-        //         ),
-        //       ],
-        //     ),
-        //   ),
-        // ),
         backgroundColor: Colors.white,
         body: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -180,71 +139,128 @@ class _HomeScreenState extends State<HomeScreen> {
                           discount: discount,
                           price: price,
                           rate: rate,
+                          key: x.id,
                         );
 
                         homeControllor.DataList.add(homeModel);
                       }
                       return Column(
                         children: [
-                          Container(
-                            height: 100.sp,
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
+                          // Container(
+                          //   height: 100.sp,
+                          //   child: ListView.builder(
+                          //     scrollDirection: Axis.horizontal,
+                          //     itemCount: homeControllor.DataList.length,
+                          //     itemBuilder: (context, index) {
+                          //       return Container(
+                          //         width: 150.sp,
+                          //         height: 100.sp,
+                          //         margin: EdgeInsets.all(10),
+                          //         decoration: BoxDecoration(
+                          //           borderRadius: BorderRadius.circular(10.sp),
+                          //           color: Colors.grey,
+                          //         ),
+                          //         child: Padding(
+                          //           padding: EdgeInsets.all(10.sp),
+                          //           child: Column(
+                          //             crossAxisAlignment:
+                          //                 CrossAxisAlignment.start,
+                          //             children: [
+                          //               Text(
+                          //                 "${homeControllor.DataList[index].discount}% off",
+                          //                 style: TextStyle(
+                          //                   fontWeight: FontWeight.bold,
+                          //                   fontSize: 15.sp,
+                          //                   color: Colors.black,
+                          //                 ),
+                          //               ),
+                          //               Text(
+                          //                 "${homeControllor.DataList[index].name}",
+                          //                 style: TextStyle(
+                          //                   fontWeight: FontWeight.bold,
+                          //                   fontSize: 15.sp,
+                          //                   color: Colors.black,
+                          //                 ),
+                          //               ),
+                          //               SizedBox(height: 15.sp),
+                          //               InkWell(
+                          //                 onTap: () {
+                          //                   // Get.toNamed('/show',arguments: index,);
+                          //                 },
+                          //                 child: Container(
+                          //                   decoration: BoxDecoration(
+                          //                     borderRadius:
+                          //                         BorderRadius.circular(20.sp),
+                          //                     color: Colors.black,
+                          //                   ),
+                          //                   width: 35.sp,
+                          //                   height: 15.sp,
+                          //                   alignment: Alignment.center,
+                          //                   child: Text(
+                          //                     "Get Now",
+                          //                     style: TextStyle(
+                          //                       fontSize: 8.sp,
+                          //                       color: Colors.white,
+                          //                     ),
+                          //                   ),
+                          //                 ),
+                          //               ),
+                          //             ],
+                          //           ),
+                          //         ),
+                          //       );
+                          //     },
+                          //   ),
+                          // ),
+                          Expanded(
+                            child: GridView.builder(
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                mainAxisExtent: 175.sp,
+                              ),
                               itemCount: homeControllor.DataList.length,
                               itemBuilder: (context, index) {
-                                return Container(
-                                  width: 150.sp,
-                                  height: 100.sp,
-                                  margin: EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10.sp),
-                                    color: Colors.grey,
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsets.all(10.sp),
+                                return InkWell(
+                                  // onLongPress: () {
+                                  //   HomeModel homeModel = HomeModel(
+                                  //     key: homeControllor.DataList[index].key,
+                                  //     name: homeControllor.DataList[index].name,
+                                  //     brand:
+                                  //         homeControllor.DataList[index].brand,
+                                  //     desc: homeControllor.DataList[index].desc,
+                                  //     discount: homeControllor
+                                  //         .DataList[index].discount,
+                                  //     price:
+                                  //         homeControllor.DataList[index].price,
+                                  //     rate: homeControllor.DataList[index].rate,
+                                  //     checkUpdate: 1,
+                                  //     size: homeControllor.DataList[index].size,
+                                  //   );
+                                  //   Get.toNamed(
+                                  //     '/addData',
+                                  //     arguments: homeModel,
+                                  //   );
+                                  // },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.circular(10.sp),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black12,
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
+                                        ),
+                                      ],
+                                      color: Colors.white,
+                                    ),
+                                    margin: EdgeInsets.all(10),
+                                    alignment: Alignment.center,
                                     child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          "${homeControllor.DataList[index].discount}% off",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 15.sp,
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${homeControllor.DataList[index].name}",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 15.sp,
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                        SizedBox(height: 15.sp),
-                                        InkWell(
-                                          onTap: () {
-                                            Get.toNamed('/show',arguments: index,);
-                                          },
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(20.sp),
-                                              color: Colors.black,
-                                            ),
-                                            width: 35.sp,
-                                            height: 15.sp,
-                                            alignment: Alignment.center,
-                                            child: Text(
-                                              "Get Now",
-                                              style: TextStyle(
-                                                fontSize: 8.sp,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
+                                        Text("⭐️ ${homeControllor.DataList[index].rate}",),
                                       ],
                                     ),
                                   ),
@@ -265,15 +281,21 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Get.toNamed('/addData');
-          },
-          backgroundColor: Colors.black,
-          child: Icon(
-            Icons.add,
-          ),
-        ),
+        // floatingActionButton: FloatingActionButton(
+        //   onPressed: () {
+        //     HomeModel homeModel = HomeModel(
+        //       checkUpdate: 0,
+        //     );
+        //     Get.toNamed(
+        //       '/addData',
+        //       arguments: homeModel,
+        //     );
+        //   },
+        //   backgroundColor: Colors.black,
+        //   child: Icon(
+        //     Icons.add,
+        //   ),
+        // ),
       ),
     );
   }
