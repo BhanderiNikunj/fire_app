@@ -225,7 +225,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         SizedBox(height: 15.sp),
                                         InkWell(
                                           onTap: () {
-                                            Get.toNamed('/show');
+                                            Get.toNamed('/show',arguments: index,);
                                           },
                                           child: Container(
                                             decoration: BoxDecoration(

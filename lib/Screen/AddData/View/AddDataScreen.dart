@@ -153,17 +153,22 @@ class _AddDataScreenState extends State<AddDataScreen> {
                   ),
                 ),
                 SizedBox(height: 10.sp),
-                Row(
-                  children: [
-                    Container(
-                      width: 30.sp,
-                      height: 30.sp,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
+                Container(
+                  height: 50.sp,
+                  width: double.infinity,
+                  child: ListView.builder(
+                    itemBuilder: (context, index) {
+                      return Container(
+                        width: 30.sp,
+                        height: 30.sp,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.black,
+                        ),
+                      );
+                    },
+                    itemCount: 3,
+                  ),
                 ),
                 SizedBox(height: 10.sp),
                 TextField(
