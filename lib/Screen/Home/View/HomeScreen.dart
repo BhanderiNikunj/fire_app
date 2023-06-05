@@ -29,20 +29,20 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.black,
-          actions: [
-            IconButton(
-              onPressed: () {
-                FireHelper.fireHelper.SignOut();
-                Get.offAndToNamed('/logIn');
-              },
-              icon: Icon(
-                Icons.logout,
-              ),
-            ),
-          ],
-        ),
+        // appBar: AppBar(
+        //   backgroundColor: Colors.black,
+        //   actions: [
+        //     IconButton(
+        //       onPressed: () {
+        //         FireHelper.fireHelper.SignOut();
+        //         Get.offAndToNamed('/logIn');
+        //       },
+        //       icon: Icon(
+        //         Icons.logout,
+        //       ),
+        //     ),
+        //   ],
+        // ),
         backgroundColor: Colors.white,
         body: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -50,31 +50,41 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 20.sp),
-              Text(
-                "Welcome",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20.sp,
-                ),
-              ),
-              SizedBox(height: 5.sp),
-              Text(
-                "Our Fashion App",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20.sp,
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Icon(
+                    Icons.menu,
+                  ),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.location_on_sharp,
+                        color: Colors.red,
+                      ),
+                      Text(
+                        "Location",
+                      ),
+                    ],
+                  ),
+                  CircleAvatar(
+                    backgroundColor: Colors.pink,
+                  ),
+                ],
               ),
               SizedBox(height: 20.sp),
               Center(
                 child: Container(
-                  height: 40.sp,
+                  height: 35.sp,
                   width: 300.sp,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.sp),
-                    color: Color(0xffF3F4F5),
+                    gradient: LinearGradient(
+                      colors: [
+                        Color(0xffFFF0F0),
+                        Color(0xffFFDFDF),
+                      ],
+                    ),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -256,12 +266,73 @@ class _HomeScreenState extends State<HomeScreen> {
                                       color: Colors.white,
                                     ),
                                     margin: EdgeInsets.all(10),
-                                    alignment: Alignment.center,
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text("⭐️ ${homeControllor.DataList[index].rate}",),
-                                      ],
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "⭐️ ${homeControllor.DataList[index].rate}",
+                                          ),
+                                          Container(
+                                            height: 60.sp,
+                                          ),
+                                          Container(
+                                            height: 20.sp,
+                                            child: Text(
+                                              "${homeControllor.DataList[index].name}",
+                                              style: TextStyle(
+                                                fontSize: 15.sp,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(height: 5.sp),
+                                          Container(
+                                            height: 10.sp,
+                                            child: Text(
+                                              "${homeControllor.DataList[index].desc}",
+                                              style: TextStyle(
+                                                fontSize: 8.sp,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(height: 15.sp),
+                                          Container(
+                                            height: 30,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  "\$ ${homeControllor.DataList[index].price}.00",
+                                                  style: TextStyle(
+                                                    fontSize: 8.sp,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                                Container(
+                                                  height: 30.sp,
+                                                  width: 30.sp,
+                                                  decoration: BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    color: Colors.pink,
+                                                  ),
+                                                  alignment: Alignment.center,
+                                                  child: Icon(
+                                                    Icons.add,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 );
