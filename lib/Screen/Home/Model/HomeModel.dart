@@ -1,5 +1,5 @@
 class HomeModel {
-  String? name, price, rate, discount, desc, brand, size, key;
+  String? name, price, rate, discount, desc, brand, size, key , image;
   int? checkUpdate;
 
   HomeModel({
@@ -12,5 +12,6 @@ class HomeModel {
     this.size,
     this.checkUpdate,
     this.key,
+    this.image,
   });
 }

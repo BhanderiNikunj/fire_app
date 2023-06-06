@@ -140,6 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         var desc = data['desc'];
                         var brand = data['brand'];
                         var size = data['size'];
+                        var image = data['image'];
 
                         HomeModel homeModel = HomeModel(
                           size: size,
@@ -150,6 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           price: price,
                           rate: rate,
                           key: x.id,
+                          image: image,
                         );
 
                         homeControllor.DataList.add(homeModel);
@@ -277,6 +279,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                           Container(
                                             height: 60.sp,
+                                            child: Image.network("${homeControllor.DataList[index].image}"),
                                           ),
                                           Container(
                                             height: 20.sp,
