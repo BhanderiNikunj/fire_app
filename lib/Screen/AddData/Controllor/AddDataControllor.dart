@@ -24,6 +24,7 @@ class AddDataControllor extends GetxController {
       desc: h1.desc,
       brand: h1.brand,
       size: h1.size,
+      image: "",
     );
   }
 
@@ -39,6 +40,7 @@ class AddDataControllor extends GetxController {
       desc: h1.desc,
       brand: h1.brand,
       size: h1.size,
+      image: "",
     );
   }
 }

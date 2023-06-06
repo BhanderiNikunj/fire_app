@@ -31,7 +31,7 @@ class _SpleshScreenState extends State<SpleshScreen> {
   @override
   Widget build(BuildContext context) {
     Timer(Duration(seconds: 3), () {
-      Get.offAndToNamed(spleshControllor.isLogin == true ? '/home' : '/logIn');
+      Get.offAndToNamed(spleshControllor.isLogin == true ? '/bottom' : '/logIn');
     });
 
 

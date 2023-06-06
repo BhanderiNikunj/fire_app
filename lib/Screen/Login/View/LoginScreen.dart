@@ -142,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Get.snackbar("$msg", "");
 
                     if (msg == "success") {
-                      Get.offAndToNamed('/home');
+                      Get.offAndToNamed('/bottom');
                     }
                   },
                   child: Container(

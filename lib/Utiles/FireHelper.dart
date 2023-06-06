@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fire_app/Screen/Home/Model/HomeModel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -99,10 +100,8 @@ class FireHelper {
     required desc,
     required brand,
     required size,
+    required image,
   }) async {
-    // User? user = await firebaseAuth.currentUser;
-    //
-    // String uid = user!.uid;
     await firebaseFirestore.collection("Product").add(
       {
         "name": name,
@@ -112,6 +111,7 @@ class FireHelper {
         "desc": desc,
         "brand": brand,
         "size": size,
+        "image": image,
       },
     );
   }
@@ -129,6 +129,7 @@ class FireHelper {
     required desc,
     required brand,
     required size,
+    required image,
   }) {
     print(key);
     firebaseFirestore.collection("Product").doc(key).set(
@@ -140,13 +141,37 @@ class FireHelper {
         "desc": desc,
         "brand": brand,
         "size": size,
+        "image": image,
       },
     );
   }
 
   // cart User
 
-  void InsertUserCart() {
-    
+  Future<void> InsertUserCart({
+    required HomeModel h1,
+  }) async {
+    await firebaseFirestore
+        .collection("Shell")
+        .doc(FindUid())
+        .collection("Cart")
+        .add(
+      {
+        "name": h1.name,
+        "price": h1.price,
+        "discount": h1.discount,
+        "rate": h1.rate,
+        "desc": h1.desc,
+        "brand": h1.brand,
+        "size": h1.size,
+        "image": h1.image
+      },
+    );
+  }
+
+  String FindUid() {
+    User? user = firebaseAuth.currentUser;
+    var uid = user!.uid;
+    return uid;
   }
 }

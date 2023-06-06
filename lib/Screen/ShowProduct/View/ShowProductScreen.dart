@@ -1,6 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fire_app/Screen/Home/Controllor/HomeControllor.dart';
 import 'package:fire_app/Screen/Home/Model/HomeModel.dart';
+import 'package:fire_app/Screen/ShowProduct/Controllor/ShowProductControllor.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -13,8 +12,8 @@ class ShowProductScreen extends StatefulWidget {
 }
 
 class _ShowProductScreenState extends State<ShowProductScreen> {
-  HomeControllor homeControllor = Get.put(
-    HomeControllor(),
+  ShowProductControllor showProductControllor = Get.put(
+    ShowProductControllor(),
   );
 
   HomeModel homeModel = Get.arguments;
@@ -231,60 +230,35 @@ class _ShowProductScreenState extends State<ShowProductScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Container(
-                        height: 40.sp,
-                        width: 130.sp,
-                        padding: EdgeInsets.all(10.sp),
-                        margin: EdgeInsets.all(10.sp),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.sp),
-                          boxShadow: [
-                            BoxShadow(
-                                blurRadius: 5,
-                                spreadRadius: 5,
-                                color: Colors.black12)
-                          ],
-                          color: Color(0xffD61355),
-                        ),
-                        alignment: Alignment.center,
-                        child: Text(
-                          "Add To Cart",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 12.sp,
-                            color: Colors.white,
-                          ),
+                  InkWell(
+                    onTap: () {
+                      showProductControllor.AddToCart(h1: homeModel,);
+                    },
+                    child: Container(
+                      height: 40.sp,
+                      width: double.infinity,
+                      padding: EdgeInsets.all(10.sp),
+                      margin: EdgeInsets.all(10.sp),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.sp),
+                        boxShadow: [
+                          BoxShadow(
+                              blurRadius: 5,
+                              spreadRadius: 5,
+                              color: Colors.black12)
+                        ],
+                        color: Color(0xffD61355),
+                      ),
+                      alignment: Alignment.center,
+                      child: Text(
+                        "Add To Cart",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12.sp,
+                          color: Colors.white,
                         ),
                       ),
-                      Container(
-                        height: 40.sp,
-                        width: 130.sp,
-                        padding: EdgeInsets.all(10.sp),
-                        margin: EdgeInsets.all(10.sp),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.sp),
-                          boxShadow: [
-                            BoxShadow(
-                                blurRadius: 5,
-                                spreadRadius: 5,
-                                color: Colors.black12)
-                          ],
-                          color: Color(0xffD61355),
-                        ),
-                        alignment: Alignment.center,
-                        child: Text(
-                          "Buy Now",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 12.sp,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ],
               ),
