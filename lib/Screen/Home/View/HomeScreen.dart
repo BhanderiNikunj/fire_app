@@ -141,6 +141,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         var brand = data['brand'];
                         var size = data['size'];
                         var image = data['image'];
+                        var types = data['types'];
+                        var oder_list = data['oder_list'];
 
                         HomeModel homeModel = HomeModel(
                           size: size,
@@ -152,78 +154,15 @@ class _HomeScreenState extends State<HomeScreen> {
                           rate: rate,
                           key: x.id,
                           image: image,
+                          types: types,
+                          oder_List: oder_list,
                         );
 
+                        print(oder_list);
                         homeControllor.DataList.add(homeModel);
                       }
                       return Column(
                         children: [
-                          // Container(
-                          //   height: 100.sp,
-                          //   child: ListView.builder(
-                          //     scrollDirection: Axis.horizontal,
-                          //     itemCount: homeControllor.DataList.length,
-                          //     itemBuilder: (context, index) {
-                          //       return Container(
-                          //         width: 150.sp,
-                          //         height: 100.sp,
-                          //         margin: EdgeInsets.all(10),
-                          //         decoration: BoxDecoration(
-                          //           borderRadius: BorderRadius.circular(10.sp),
-                          //           color: Colors.grey,
-                          //         ),
-                          //         child: Padding(
-                          //           padding: EdgeInsets.all(10.sp),
-                          //           child: Column(
-                          //             crossAxisAlignment:
-                          //                 CrossAxisAlignment.start,
-                          //             children: [
-                          //               Text(
-                          //                 "${homeControllor.DataList[index].discount}% off",
-                          //                 style: TextStyle(
-                          //                   fontWeight: FontWeight.bold,
-                          //                   fontSize: 15.sp,
-                          //                   color: Colors.black,
-                          //                 ),
-                          //               ),
-                          //               Text(
-                          //                 "${homeControllor.DataList[index].name}",
-                          //                 style: TextStyle(
-                          //                   fontWeight: FontWeight.bold,
-                          //                   fontSize: 15.sp,
-                          //                   color: Colors.black,
-                          //                 ),
-                          //               ),
-                          //               SizedBox(height: 15.sp),
-                          //               InkWell(
-                          //                 onTap: () {
-                          //                   // Get.toNamed('/show',arguments: index,);
-                          //                 },
-                          //                 child: Container(
-                          //                   decoration: BoxDecoration(
-                          //                     borderRadius:
-                          //                         BorderRadius.circular(20.sp),
-                          //                     color: Colors.black,
-                          //                   ),
-                          //                   width: 35.sp,
-                          //                   height: 15.sp,
-                          //                   alignment: Alignment.center,
-                          //                   child: Text(
-                          //                     "Get Now",
-                          //                     style: TextStyle(
-                          //                       fontSize: 8.sp,
-                          //                       color: Colors.white,
-                          //                     ),
-                          //                   ),
-                          //                 ),
-                          //               ),
-                          //             ],
-                          //           ),
-                          //         ),
-                          //       );
-                          //     },
-                          //   ),
-                          // ),
                           Expanded(
                             child: GridView.builder(
                               gridDelegate:
@@ -234,26 +173,28 @@ class _HomeScreenState extends State<HomeScreen> {
                               itemCount: homeControllor.DataList.length,
                               itemBuilder: (context, index) {
                                 return InkWell(
-                                  // onLongPress: () {
-                                  //   HomeModel homeModel = HomeModel(
-                                  //     key: homeControllor.DataList[index].key,
-                                  //     name: homeControllor.DataList[index].name,
-                                  //     brand:
-                                  //         homeControllor.DataList[index].brand,
-                                  //     desc: homeControllor.DataList[index].desc,
-                                  //     discount: homeControllor
-                                  //         .DataList[index].discount,
-                                  //     price:
-                                  //         homeControllor.DataList[index].price,
-                                  //     rate: homeControllor.DataList[index].rate,
-                                  //     checkUpdate: 1,
-                                  //     size: homeControllor.DataList[index].size,
-                                  //   );
-                                  //   Get.toNamed(
-                                  //     '/addData',
-                                  //     arguments: homeModel,
-                                  //   );
-                                  // },
+                                  onTap: () {
+                                    HomeModel homeModel = HomeModel(
+                                      name: homeControllor.DataList[index].name,
+                                      oder_List: homeControllor
+                                          .DataList[index].oder_List,
+                                      types:
+                                          homeControllor.DataList[index].types,
+                                      key: homeControllor.DataList[index].key,
+                                      size: homeControllor.DataList[index].size,
+                                      desc: homeControllor.DataList[index].desc,
+                                      discount: homeControllor
+                                          .DataList[index].discount,
+                                      price:
+                                          homeControllor.DataList[index].price,
+                                      rate: homeControllor.DataList[index].rate,
+                                      brand:
+                                          homeControllor.DataList[index].brand,
+                                      image:
+                                          homeControllor.DataList[index].image,
+                                    );
+                                    Get.toNamed('/show', arguments: homeModel);
+                                  },
                                   child: Container(
                                     decoration: BoxDecoration(
                                       borderRadius:
@@ -279,7 +220,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                           Container(
                                             height: 60.sp,
-                                            child: Image.network("${homeControllor.DataList[index].image}"),
+                                            child: Image.network(
+                                                "${homeControllor.DataList[index].image}"),
                                           ),
                                           Container(
                                             height: 20.sp,
@@ -314,7 +256,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 Text(
                                                   "\$ ${homeControllor.DataList[index].price}.00",
                                                   style: TextStyle(
-                                                    fontSize: 8.sp,
+                                                    fontSize: 10.sp,
+                                                    fontWeight: FontWeight.bold,
                                                     color: Colors.black,
                                                   ),
                                                 ),
@@ -355,21 +298,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
-        // floatingActionButton: FloatingActionButton(
-        //   onPressed: () {
-        //     HomeModel homeModel = HomeModel(
-        //       checkUpdate: 0,
-        //     );
-        //     Get.toNamed(
-        //       '/addData',
-        //       arguments: homeModel,
-        //     );
-        //   },
-        //   backgroundColor: Colors.black,
-        //   child: Icon(
-        //     Icons.add,
-        //   ),
-        // ),
       ),
     );
   }

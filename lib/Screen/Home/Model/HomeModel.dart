@@ -1,5 +1,15 @@
 class HomeModel {
-  String? name, price, rate, discount, desc, brand, size, key , image;
+  String? name,
+      price,
+      rate,
+      discount,
+      desc,
+      brand,
+      size,
+      key,
+      image,
+      types,
+      oder_List;
   int? checkUpdate;
 
   HomeModel({
@@ -12,6 +22,8 @@ class HomeModel {
     this.size,
     this.checkUpdate,
     this.key,
+    this.types,
     this.image,
+    this.oder_List,
   });
 }
