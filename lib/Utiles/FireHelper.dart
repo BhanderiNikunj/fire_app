@@ -169,6 +169,10 @@ class FireHelper {
     );
   }
 
+  Stream<QuerySnapshot<Map<String, dynamic>>> readUserCart() {
+    return firebaseFirestore.collection("Shell").doc(FindUid()).collection("Cart").snapshots();
+  }
+
   String FindUid() {
     User? user = firebaseAuth.currentUser;
     var uid = user!.uid;
