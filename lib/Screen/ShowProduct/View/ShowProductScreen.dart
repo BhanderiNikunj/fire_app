@@ -232,7 +232,9 @@ class _ShowProductScreenState extends State<ShowProductScreen> {
                 children: [
                   InkWell(
                     onTap: () {
-                      showProductControllor.AddToCart(h1: homeModel,);
+                      showProductControllor.AddToCart(
+                        h1: homeModel,
+                      );
                     },
                     child: Container(
                       height: 40.sp,
@@ -243,9 +245,10 @@ class _ShowProductScreenState extends State<ShowProductScreen> {
                         borderRadius: BorderRadius.circular(10.sp),
                         boxShadow: [
                           BoxShadow(
-                              blurRadius: 5,
-                              spreadRadius: 5,
-                              color: Colors.black12)
+                            blurRadius: 5,
+                            spreadRadius: 5,
+                            color: Colors.black12,
+                          )
                         ],
                         color: Color(0xffD61355),
                       ),

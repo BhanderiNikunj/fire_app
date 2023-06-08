@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fire_app/Screen/Home/Model/HomeModel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class FireHelper {
@@ -10,6 +11,7 @@ class FireHelper {
 
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
 
   Future<String?> SignUp({required email, required password}) async {
     String? msg;
@@ -186,6 +188,12 @@ class FireHelper {
         .collection("Cart")
         .doc(key)
         .delete();
+  }
+
+  Future<String?> fcmTokan() async {
+    var fcmToken = await firebaseMessaging.getToken();
+    print("=================================$fcmToken");
+    return fcmToken;
   }
 
   String FindUid() {

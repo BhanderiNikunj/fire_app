@@ -18,6 +18,13 @@ class _LoginScreenState extends State<LoginScreen> {
   );
 
   @override
+  void initState() {
+    super.initState();
+
+    FireHelper.fireHelper.fcmTokan();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
