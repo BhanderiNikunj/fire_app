@@ -1,7 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fire_app/Screen/Cart/Controllor/CartControllor.dart';
 import 'package:fire_app/Screen/Cart/Model/CartModel.dart';
-import 'package:fire_app/Screen/Home/Model/HomeModel.dart';
 import 'package:fire_app/Utiles/FireHelper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -42,6 +40,7 @@ class _CartScreenState extends State<CartScreen> {
                   discount: data['discount'],
                   desc: data['desc'],
                   size: data['size'],
+                  quantity: cartControllor.Quantity,
                 );
 
                 cartControllor.CartDataList.add(cartModel);
@@ -146,7 +145,15 @@ class _CartScreenState extends State<CartScreen> {
                                           MainAxisAlignment.spaceEvenly,
                                       children: [
                                         InkWell(
-                                          onTap: () {},
+                                          onTap: () {
+                                            setState(() {
+                                              cartControllor.CartDataList[index]
+                                                  .quantity = cartControllor
+                                                  .CartDataList[index]
+                                                  .quantity! -
+                                                  1;
+                                            });
+                                          },
                                           child: Container(
                                             height: 25.sp,
                                             width: 25.sp,
@@ -163,14 +170,24 @@ class _CartScreenState extends State<CartScreen> {
                                           ),
                                         ),
                                         Text(
-                                          "0",
+                                          "${cartControllor.CartDataList[index].quantity}",
                                           style: TextStyle(
                                             fontSize: 12.sp,
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
                                         InkWell(
-                                          onTap: () {},
+                                          onTap: () {
+                                            print(
+                                                "==========================${index+1}==========================${cartControllor.CartDataList[index].quantity}");
+                                            setState(() {
+                                              cartControllor.CartDataList[index]
+                                                  .quantity = cartControllor
+                                                      .CartDataList[index]
+                                                      .quantity! +
+                                                  1;
+                                            });
+                                          },
                                           child: Container(
                                             height: 25.sp,
                                             width: 25.sp,

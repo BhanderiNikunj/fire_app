@@ -3,4 +3,6 @@ import 'package:get/get.dart';
 
 class CartContollor extends GetxController {
   List<CartModel> CartDataList = [];
+
+  int Quantity = 1;
 }

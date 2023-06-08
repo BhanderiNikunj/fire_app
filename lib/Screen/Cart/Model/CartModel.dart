@@ -1,5 +1,6 @@
 class CartModel {
   String? name, desc, discount, image, price, rate, size;
+  int? quantity;
 
   CartModel({
     this.name,
@@ -9,5 +10,6 @@ class CartModel {
     this.price,
     this.rate,
     this.size,
+    this.quantity,
   });
 }
