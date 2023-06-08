@@ -18,6 +18,22 @@ class _CartScreenState extends State<CartScreen> {
   );
 
   @override
+  void initState() {
+    super.initState();
+
+    cartControllor.subTotal = 0;
+
+    for (int i = 0; i < cartControllor.CartDataList.length; i++) {
+      cartControllor.subTotal += int.parse("${cartControllor.CartDataList[i].price}");
+    }
+
+    cartControllor.total = cartControllor.subTotal + cartControllor.delivery;
+
+    print(cartControllor.total);
+  }
+
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -41,13 +57,12 @@ class _CartScreenState extends State<CartScreen> {
                   desc: data['desc'],
                   size: data['size'],
                   quantity: cartControllor.Quantity,
+                  key: x.id,
                 );
 
                 cartControllor.CartDataList.add(cartModel);
-                print("hello");
               }
 
-              print(cartControllor.CartDataList.length);
               return Padding(
                 padding: EdgeInsets.all(10.sp),
                 child: Column(
@@ -63,10 +78,14 @@ class _CartScreenState extends State<CartScreen> {
                       ),
                     ),
                     SizedBox(height: 30.sp),
-                    Expanded(
+                    Container(
+                      height: 350.sp,
                       child: ListView.builder(
                         itemCount: cartControllor.CartDataList.length,
                         itemBuilder: (context, index) {
+                          // cartControllor.Total = int.parse("${cartControllor.CartDataList[index].price + cartControllor.CartDataList[index+1].price}");
+
+
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Container(
@@ -140,68 +159,77 @@ class _CartScreenState extends State<CartScreen> {
                                   Container(
                                     height: 80.sp,
                                     width: 120,
-                                    child: Row(
+                                    child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
                                       children: [
-                                        InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              cartControllor.CartDataList[index]
-                                                  .quantity = cartControllor
-                                                  .CartDataList[index]
-                                                  .quantity! -
-                                                  1;
-                                            });
-                                          },
-                                          child: Container(
-                                            height: 25.sp,
-                                            width: 25.sp,
-                                            decoration: BoxDecoration(
-                                              color: Color(0xffFDE6E9),
-                                              borderRadius:
-                                                  BorderRadius.circular(5.sp),
-                                            ),
-                                            alignment: Alignment.center,
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: InkWell(
+                                            onTap: () {
+                                              FireHelper.fireHelper
+                                                  .deleteUserCart(
+                                                key: cartControllor
+                                                    .CartDataList[index].key,
+                                              );
+                                            },
                                             child: Icon(
-                                              Icons.remove,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ),
-                                        Text(
-                                          "${cartControllor.CartDataList[index].quantity}",
-                                          style: TextStyle(
-                                            fontSize: 12.sp,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        InkWell(
-                                          onTap: () {
-                                            print(
-                                                "==========================${index+1}==========================${cartControllor.CartDataList[index].quantity}");
-                                            setState(() {
-                                              cartControllor.CartDataList[index]
-                                                  .quantity = cartControllor
-                                                      .CartDataList[index]
-                                                      .quantity! +
-                                                  1;
-                                            });
-                                          },
-                                          child: Container(
-                                            height: 25.sp,
-                                            width: 25.sp,
-                                            decoration: BoxDecoration(
+                                              Icons.delete,
                                               color: Color(0xffD61355),
-                                              borderRadius:
-                                                  BorderRadius.circular(5.sp),
-                                            ),
-                                            alignment: Alignment.center,
-                                            child: Icon(
-                                              Icons.add,
-                                              color: Colors.white,
                                             ),
                                           ),
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            InkWell(
+                                              onTap: () {},
+                                              child: Container(
+                                                height: 25.sp,
+                                                width: 25.sp,
+                                                decoration: BoxDecoration(
+                                                  color: Color(0xffFDE6E9),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                    5.sp,
+                                                  ),
+                                                ),
+                                                alignment: Alignment.center,
+                                                child: Icon(
+                                                  Icons.remove,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            ),
+                                            Text(
+                                              "${cartControllor.CartDataList[index].quantity}",
+                                              style: TextStyle(
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            InkWell(
+                                              onTap: () {},
+                                              child: Container(
+                                                height: 25.sp,
+                                                width: 25.sp,
+                                                decoration: BoxDecoration(
+                                                  color: Color(0xffD61355),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          5.sp),
+                                                ),
+                                                alignment: Alignment.center,
+                                                child: Icon(
+                                                  Icons.add,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
@@ -212,7 +240,100 @@ class _CartScreenState extends State<CartScreen> {
                           );
                         },
                       ),
-                    )
+                    ),
+                    SizedBox(height: 20.sp),
+                    Center(
+                      child: Container(
+                        height: 100.sp,
+                        width: 250.sp,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.sp),
+                          gradient: LinearGradient(
+                            colors: [
+                              Color(0xffF8030F),
+                              Color(0xffDB114B),
+                            ],
+                          ),
+                        ),
+                        alignment: Alignment.center,
+                        child: Stack(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(10.sp),
+                              child: Image.asset(
+                                "Assets/Images/patten.png",
+                                fit: BoxFit.cover,
+                                height: 100.sp,
+                                width: 250.sp,
+                                color: Colors.white,
+                                alignment: Alignment.center,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "Sub Total",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      Text(
+                                        "\$ ${cartControllor.total}",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "Delivery Charge",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      Text(
+                                        "\$ ${cartControllor.delivery}",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "Discount",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      Text(
+                                        "\$ ${cartControllor.discount}%",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               );

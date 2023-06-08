@@ -30,6 +30,10 @@ class _BottomScreenState extends State<BottomScreen> {
               filledIcon: Icons.shopping_cart,
               outlinedIcon: Icons.shopping_cart_outlined,
             ),
+            BarItem(
+              filledIcon: Icons.person,
+              outlinedIcon: Icons.person_outline,
+            ),
           ],
           inactiveIconColor: Colors.pink.shade200,
           waterDropColor: Colors.pink,

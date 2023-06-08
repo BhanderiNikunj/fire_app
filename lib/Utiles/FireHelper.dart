@@ -170,7 +170,22 @@ class FireHelper {
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> readUserCart() {
-    return firebaseFirestore.collection("Shell").doc(FindUid()).collection("Cart").snapshots();
+    return firebaseFirestore
+        .collection("Shell")
+        .doc(FindUid())
+        .collection("Cart")
+        .snapshots();
+  }
+
+  Future<void> deleteUserCart({
+    required key,
+  }) async {
+    await firebaseFirestore
+        .collection("Shell")
+        .doc(FindUid())
+        .collection("Cart")
+        .doc(key)
+        .delete();
   }
 
   String FindUid() {

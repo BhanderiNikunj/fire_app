@@ -29,7 +29,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 SizedBox(height: 12.h),
                 Center(
                   child: Text(
-                    "LogIn",
+                    "SignUp",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 30.sp,
@@ -50,7 +50,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     prefixIconColor: Colors.black45,
                     labelStyle: TextStyle(
-                      color: Colors.black,
+                      color: Colors.black45,
                     ),
                     label: Text("Email Address"),
                     border: OutlineInputBorder(
@@ -69,9 +69,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 SizedBox(height: 15.sp),
                 Obx(
-                      () => TextField(
+                  () => TextField(
                     obscureText:
-                    signUpControllor.isPass.value == true ? false : true,
+                        signUpControllor.isPass.value == true ? false : true,
                     controller: signUpControllor.txtPassword,
                     style: TextStyle(
                       fontSize: 10.sp,
@@ -84,7 +84,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       prefixIconColor: Colors.black45,
                       labelStyle: TextStyle(
-                        color: Colors.black,
+                        color: Colors.black45,
                       ),
                       label: Text("Password"),
                       border: OutlineInputBorder(
@@ -99,32 +99,37 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.sp),
                       ),
+                      suffixIcon: InkWell(
+                        onTap: () {
+                          signUpControllor.isPass.value =
+                              !signUpControllor.isPass.value;
+                          // signUpControllor.isPass.value = true;
+                        },
+                        child: Icon(
+                          signUpControllor.isPass == true
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          size: 18.sp,
+                        ),
+                      ),
                     ),
                   ),
                 ),
-                SizedBox(height: 5.sp),
+                SizedBox(height: 8.sp),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Row(
-                      children: [
-                        Obx(
-                              () => Checkbox(
-                            activeColor: Colors.black,
-                            value: signUpControllor.isPass.value,
-                            onChanged: (value) {
-                              signUpControllor.isPass.value = value!;
-                            },
-                          ),
-                        ),
-                        Text(
-                          "Show Password",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
+                    // Row(
+                    //   children: [
+
+                    //     Text(
+                    //       "Show Password",
+                    //       style: TextStyle(
+                    //         fontWeight: FontWeight.bold,
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                     Text(
                       "Forgot Password ? ",
                     ),
@@ -137,11 +142,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       email: signUpControllor.txtEmail.text,
                       password: signUpControllor.txtPassword.text,
                     );
-
                     Get.snackbar("$msg", "");
 
                     if (msg == "success") {
-                      Get.back();
+                      Get.toNamed('/addUserDetail');
                     }
                   },
                   child: Container(
@@ -168,7 +172,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     Get.back();
                   },
                   child: Text(
-                    "You Have Create Account ? SignUp",
+                    "Have Already Account ? SignIn",
                     style: TextStyle(
                       color: Colors.black,
                     ),
@@ -178,7 +182,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 InkWell(
                   onTap: () async {
                     UserCredential user =
-                    await FireHelper.fireHelper.signInWithGoogle();
+                        await FireHelper.fireHelper.signInWithGoogle();
                     // ignore: unnecessary_null_comparison
                     if (user == null) {
                       Get.snackbar("title", "message");
