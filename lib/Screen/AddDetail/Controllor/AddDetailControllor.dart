@@ -13,12 +13,16 @@ class AddDetailControllor extends GetxController {
     required l_name,
     required mobile_no,
     required address,
+    required image,
   }) {
     return FireHelper.fireHelper.insertUserDetail(
       f_name: f_name,
       l_name: l_name,
       mobile_no: mobile_no,
       address: address,
+      image: image,
     );
   }
+
+
 }

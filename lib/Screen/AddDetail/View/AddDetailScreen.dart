@@ -185,6 +185,7 @@ class _AddDetailScreenState extends State<AddDetailScreen> {
                       l_name: addDetailControllor.txtfname.text,
                       mobile_no: addDetailControllor.txtfname.text,
                       address: addDetailControllor.txtfname.text,
+                      image: addDetailControllor.txtfname.text,
                     );
 
                     Get.snackbar("$msg", "",);

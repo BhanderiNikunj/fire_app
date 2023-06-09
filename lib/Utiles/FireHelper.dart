@@ -15,7 +15,6 @@ class FireHelper {
 
   Future<String?> SignUp({required email, required password}) async {
     String? msg;
-    print("$email    $password ========================================");
     await firebaseAuth
         .createUserWithEmailAndPassword(email: email, password: password)
         .then((value) {
@@ -45,7 +44,6 @@ class FireHelper {
       },
     );
 
-    print(msg);
     return msg;
   }
 
@@ -133,7 +131,6 @@ class FireHelper {
     required size,
     required image,
   }) {
-    print(key);
     firebaseFirestore.collection("Product").doc(key).set(
       {
         "name": name,
@@ -192,7 +189,6 @@ class FireHelper {
 
   Future<String?> fcmTokan() async {
     var fcmToken = await firebaseMessaging.getToken();
-    print("=================================$fcmToken");
     return fcmToken;
   }
 
@@ -207,20 +203,28 @@ class FireHelper {
     required l_name,
     required mobile_no,
     required address,
+    required image,
   }) async {
-    return await firebaseFirestore.collection("users").doc(FindUid()).collection("detail").add(
+    print(
+        "==============================${FindUid()}================${fcmTokan()}");
+    return await firebaseFirestore.collection("users").doc("${FindUid()}").set(
       {
         "f_name": f_name,
         "l_name": l_name,
         "mobile_no": mobile_no,
         "email_id": firebaseAuth.currentUser!.email,
         "address": address,
-        "fcmKey": fcmTokan(),
+        "fcmKey": await fcmTokan(),
+        "image": image,
       },
-    ).then((value){
+    ).then((value) {
       return "success";
-    }).catchError((e){
+    }).catchError((e) {
       return "failed";
     });
+  }
+
+  Stream<DocumentSnapshot<Map<String, dynamic>>> readUserDetail() {
+    return firebaseFirestore.collection("users").doc(FindUid()).snapshots();
   }
 }

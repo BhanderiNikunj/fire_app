@@ -1,4 +1,5 @@
 import 'package:fire_app/Screen/Bottom/Controllor/BottomControllor.dart';
+import 'package:fire_app/Utiles/FireHelper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:water_drop_nav_bar/water_drop_nav_bar.dart';
@@ -14,6 +15,19 @@ class _BottomScreenState extends State<BottomScreen> {
   BottomControllor bottomControllor = Get.put(
     BottomControllor(),
   );
+
+  @override
+  void initState() {
+    super.initState();
+
+    FireHelper.fireHelper.insertUserDetail(
+      f_name: "f_name",
+      l_name: "l_name",
+      mobile_no: "mobile_no",
+      address: "address",
+      image: "image",
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
