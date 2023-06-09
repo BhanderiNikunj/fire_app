@@ -64,13 +64,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           source: ImageSource.gallery,
                         );
 
-                        setState(() {
-                          profileControllor.image = xFile!.path;
+                        File imagefile =
+                            File(xFile!.path); //convert Path to File
+                        setState(() async {
+                          profileControllor.imagebytes =
+                              await imagefile.readAsBytes();
                         });
+
+                        FireHelper.fireHelper.insertUserDetail(
+                          f_name: "f_name",
+                          l_name: "l_name",
+                          mobile_no: "mobile_no",
+                          address: "address",
+                          image: "${profileControllor.imagebytes}",
+                        );
                       },
                       child: CircleAvatar(
                         radius: 50.sp,
-                        backgroundImage: FileImage(File("${profileControllor.image}"),),
+                        backgroundImage:
+                            MemoryImage(profileControllor.imagebytes!),
                       ),
                     ),
                   ),
@@ -139,7 +151,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ],
               );
             }
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           },
         ),
       ),
