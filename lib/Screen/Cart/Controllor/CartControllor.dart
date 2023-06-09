@@ -9,5 +9,6 @@ class CartContollor extends GetxController {
   int delivery = 100;
   int total = 0;
 
-  int Quantity = 1;
+  RxInt Quantity = 1.obs;
+  RxInt Quantity1 = 1.obs;
 }

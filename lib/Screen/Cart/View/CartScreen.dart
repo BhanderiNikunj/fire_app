@@ -24,14 +24,14 @@ class _CartScreenState extends State<CartScreen> {
     cartControllor.subTotal = 0;
 
     for (int i = 0; i < cartControllor.CartDataList.length; i++) {
-      cartControllor.subTotal += int.parse("${cartControllor.CartDataList[i].price}");
+      cartControllor.subTotal +=
+          int.parse("${cartControllor.CartDataList[i].price}");
     }
 
     cartControllor.total = cartControllor.subTotal + cartControllor.delivery;
 
     print(cartControllor.total);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ class _CartScreenState extends State<CartScreen> {
                   discount: data['discount'],
                   desc: data['desc'],
                   size: data['size'],
-                  quantity: cartControllor.Quantity,
+                  // quantity: cartControllor.Quantity.value,
                   key: x.id,
                 );
 
@@ -84,7 +84,6 @@ class _CartScreenState extends State<CartScreen> {
                         itemCount: cartControllor.CartDataList.length,
                         itemBuilder: (context, index) {
                           // cartControllor.Total = int.parse("${cartControllor.CartDataList[index].price + cartControllor.CartDataList[index+1].price}");
-
 
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -186,7 +185,15 @@ class _CartScreenState extends State<CartScreen> {
                                               MainAxisAlignment.spaceEvenly,
                                           children: [
                                             InkWell(
-                                              onTap: () {},
+                                              onTap: () {
+                                                if(cartControllor.Quantity1.value >= 1){
+                                                  cartControllor.Quantity1.value = cartControllor.Quantity1.value;
+                                                }
+                                                else {
+                                                  cartControllor
+                                                      .Quantity1.value -= 1;
+                                                }
+                                              },
                                               child: Container(
                                                 height: 25.sp,
                                                 width: 25.sp,
@@ -204,15 +211,20 @@ class _CartScreenState extends State<CartScreen> {
                                                 ),
                                               ),
                                             ),
-                                            Text(
-                                              "${cartControllor.CartDataList[index].quantity}",
-                                              style: TextStyle(
-                                                fontSize: 12.sp,
-                                                fontWeight: FontWeight.bold,
+                                            Obx(
+                                              () => Text(
+                                                "${cartControllor.Quantity1.value}",
+                                                style: TextStyle(
+                                                  fontSize: 12.sp,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                               ),
                                             ),
                                             InkWell(
-                                              onTap: () {},
+                                              onTap: () {
+                                                cartControllor
+                                                    .Quantity1.value += 1;
+                                              },
                                               child: Container(
                                                 height: 25.sp,
                                                 width: 25.sp,
