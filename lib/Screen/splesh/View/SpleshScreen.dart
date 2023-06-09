@@ -20,6 +20,7 @@ class _SpleshScreenState extends State<SpleshScreen> {
     super.initState();
 
     checkLogin();
+    FireHelper.fireHelper.fcmTokan();
 
   }
 

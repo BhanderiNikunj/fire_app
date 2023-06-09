@@ -1,4 +1,7 @@
+import 'package:fire_app/Screen/AddDetail/Controllor/AddDetailControllor.dart';
+import 'package:fire_app/Screen/AddDetail/Model/AddDtailModel.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 class AddDetailScreen extends StatefulWidget {
@@ -9,6 +12,10 @@ class AddDetailScreen extends StatefulWidget {
 }
 
 class _AddDetailScreenState extends State<AddDetailScreen> {
+  AddDetailControllor addDetailControllor = Get.put(
+    AddDetailControllor(),
+  );
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -26,6 +33,7 @@ class _AddDetailScreenState extends State<AddDetailScreen> {
               ),
               SizedBox(height: 5.sp),
               TextField(
+                controller: addDetailControllor.txtfname,
                 decoration: InputDecoration(
                   hintText: "Ex. abcd",
                   border: OutlineInputBorder(
@@ -60,6 +68,7 @@ class _AddDetailScreenState extends State<AddDetailScreen> {
               ),
               SizedBox(height: 5.sp),
               TextField(
+                controller: addDetailControllor.txtlname,
                 decoration: InputDecoration(
                   hintText: "Ex. abcd",
                   border: OutlineInputBorder(
@@ -94,44 +103,10 @@ class _AddDetailScreenState extends State<AddDetailScreen> {
               ),
               SizedBox(height: 5.sp),
               TextField(
+                controller: addDetailControllor.txtmobileno,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   hintText: "Ex. 9988776655",
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.black,
-                    ),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  disabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.black,
-                    ),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.black,
-                    ),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.black,
-                    ),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-              ),
-              SizedBox(height: 10.sp),
-              Text(
-                "Enter Your Email Address",
-              ),
-              SizedBox(height: 5.sp),
-              TextField(
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                  hintText: "Ex. user@gmail.com",
                   border: OutlineInputBorder(
                     borderSide: BorderSide(
                       color: Colors.black,
@@ -164,6 +139,7 @@ class _AddDetailScreenState extends State<AddDetailScreen> {
               ),
               SizedBox(height: 5.sp),
               TextField(
+                controller: addDetailControllor.txtAddress,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                   hintText: "Ex. building no,area city state pincode",
@@ -195,16 +171,38 @@ class _AddDetailScreenState extends State<AddDetailScreen> {
               ),
               SizedBox(height: 20.sp),
               Center(
-                child: Container(
-                  height: 30.sp,
-                  width: 80.sp,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    gradient: LinearGradient(
-                      colors: [
-                        Color(0xffFA030B),
-                        Color(0xffD9114E),
-                      ],
+                child: InkWell(
+                  onTap: () async {
+                    // AddDetailModel a1 = AddDetailModel(
+                    //   address: addDetailControllor.txtAddress.text,
+                    //   f_name: addDetailControllor.txtfname.text,
+                    //   l_name: addDetailControllor.txtlname.text,
+                    //   mobile_no: addDetailControllor.txtmobileno.text,
+                    // );
+
+                    String msg = await addDetailControllor.insertUserDetail(
+                      f_name: addDetailControllor.txtfname.text,
+                      l_name: addDetailControllor.txtfname.text,
+                      mobile_no: addDetailControllor.txtfname.text,
+                      address: addDetailControllor.txtfname.text,
+                    );
+
+                    Get.snackbar("$msg", "",);
+                    if (msg == "success") {
+                      Get.offAndToNamed('/bottom');
+                    }
+                  },
+                  child: Container(
+                    height: 30.sp,
+                    width: 80.sp,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      gradient: LinearGradient(
+                        colors: [
+                          Color(0xffFA030B),
+                          Color(0xffD9114E),
+                        ],
+                      ),
                     ),
                   ),
                 ),

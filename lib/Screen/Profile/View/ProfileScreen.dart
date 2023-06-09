@@ -15,16 +15,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Center(
-          child: IconButton(
-            onPressed: () {
-              FireHelper.fireHelper.SignOut();
-              Get.offAndToNamed('/signIn');
-            },
-            icon: Icon(
-              Icons.logout,
-            ),
-          ),
+        body: Column(
+          children: [
+
+          ],
         ),
       ),
     );

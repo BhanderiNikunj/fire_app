@@ -201,4 +201,26 @@ class FireHelper {
     var uid = user!.uid;
     return uid;
   }
+
+  Future<String> insertUserDetail({
+    required f_name,
+    required l_name,
+    required mobile_no,
+    required address,
+  }) async {
+    return await firebaseFirestore.collection("users").doc(FindUid()).collection("detail").add(
+      {
+        "f_name": f_name,
+        "l_name": l_name,
+        "mobile_no": mobile_no,
+        "email_id": firebaseAuth.currentUser!.email,
+        "address": address,
+        "fcmKey": fcmTokan(),
+      },
+    ).then((value){
+      return "success";
+    }).catchError((e){
+      return "failed";
+    });
+  }
 }
